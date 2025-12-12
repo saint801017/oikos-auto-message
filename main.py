@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+import os
 
 # ✅ 1) 말씀산책 최신 정보 가져오기
 def get_latest_bible_stroll():
@@ -211,6 +212,22 @@ http://www.youngnak.net/bible-hymn/audiobible/
     return message
 
 
+# ✅ 7) 텔레그램 전송
+def send_telegram(message):
+    token = os.environ["TELEGRAM_TOKEN"]
+    chat_id = os.environ["TELEGRAM_CHAT_ID"]
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    data = {
+        "chat_id": chat_id,
+        "text": message
+    }
+    response = requests.post(url, data=data)
+    print("Telegram response:", response.text)  # ✅ 응답 확인용
+
+
 # ✅ 실행
 if __name__ == "__main__":
-    print(build_message())
+    msg = build_message()
+    print(msg)  # GitHub Actions 로그 확인용
+    send_telegram(msg)
