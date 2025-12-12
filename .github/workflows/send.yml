@@ -2,7 +2,7 @@ name: Send Daily Oikos Message
 
 on:
   schedule:
-    - cron: "0 21 * * *"   # 한국시간 오전 6시
+    - cron: "0 23 * * *"   # 한국시간 오전 8시
   workflow_dispatch:
 
 jobs:
