@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import os
 
 # ✅ 1) 말씀산책 최신 정보 가져오기
@@ -165,7 +166,7 @@ def build_message():
         "Sun": "일"
     }
 
-    today_raw = datetime.now()
+    today_raw = datetime.now(ZoneInfo("Asia/Seoul"))
     weekday_eng = today_raw.strftime("%a")
     weekday_kor = weekday_map[weekday_eng]
     today = today_raw.strftime(f"%Y년 %m월 %d일({weekday_kor})")
